@@ -14,11 +14,33 @@ class Gauge extends Component{
     //** ref to select svg with d3 */
     this.svgD = React.createRef();
   }
+
+  //** prevent component to update. we just need to know when props is update */
+  shouldComponentUpdate(nextProps) {
+    this.updateData(nextProps.data);
+    return false;
+  }
+
+  //** populate d3 objects */
+  updateData(data) {
+    console.log('data ', data);
+    const p = utils.percPi(data.value, data.min, data.max);
+    console.log('p- ', p);
+    this.copyMax.text(data.maxCopy)
+      .attr("transform", function(d, i) {
+        var len = this.getComputedTextLength();
+        return "translate (" + (-len) + ",0)";
+      });
+    this.copyMin.text(data.minCopy)
+  }
+
+
   componentDidMount() {
     //** create svg container */
     this.svg = d3.select(this.svgD.current)
       .append('g')
-      .attr('transform', 'translate(' + 0 + ',' + 0 + ')');
+      //** hardcode to have a simple responsive svg */
+      .attr('transform', 'translate(' + 100 + ',' + radius + ')');
 
     //** create text placeholder */
     this.copyMin = utils.createText(-80, 10, 8, this.svg);
@@ -43,13 +65,16 @@ class Gauge extends Component{
       .style("fill", "#ff0099")
       .attr("d", this.arc);
   }
+
+  
+
   render() {
     return (
       <div
         className="gauge">
         <svg  
           className="svg-container"
-          viewBox="0 0 200 200"
+          viewBox="0 0 200 100"
           preserveAspectRatio="xMidYMid"
           ref={this.svgD}>
         </svg>
