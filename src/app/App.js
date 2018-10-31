@@ -17,11 +17,10 @@ class App extends Component {
     gaugeApi(gaugeParser)
       .then((data) => {
         //returning data after parse ()
-        console.log('data from api test', data);
+        this.setState({gaugeData: data})
       })
   }
   render() {
-    console.log('this state ', this.state);
     return (
       <div className="appx">
         <Gauge
