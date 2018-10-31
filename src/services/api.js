@@ -1,7 +1,7 @@
 import {fetchRequest} from './utils'
-export const gaugeApi = (userId) => {
+export const gaugeApi = (parser) => {
   return fetchRequest('https://widgister.herokuapp.com/challenge/frontend')
-    .then(
-      data => data
-    )
+  .then((data) => {
+    return parser(data);
+  })
 }
