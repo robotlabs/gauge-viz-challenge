@@ -17,3 +17,14 @@ export function percPi(v, min, max) {
   const pi = Math.PI; 
   return (pi * (v - min) / (max - min) - (pi / 2));
 }
+
+//** utility to update arc angle, transitioning interpolate */
+export function arcTween(newAngle, arc) {
+  return function(d) {
+    var interpolate = d3.interpolate(d.endAngle, newAngle);
+    return function(t) {
+      d.endAngle = interpolate(t);
+      return arc(d);
+    };
+  };
+}

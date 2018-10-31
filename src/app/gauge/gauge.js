@@ -23,15 +23,22 @@ class Gauge extends Component{
 
   //** populate d3 objects */
   updateData(data) {
-    console.log('data ', data);
     const p = utils.percPi(data.value, data.min, data.max);
-    console.log('p- ', p);
+
+    //** udate copy */
     this.copyMax.text(data.maxCopy)
       .attr("transform", function(d, i) {
         var len = this.getComputedTextLength();
         return "translate (" + (-len) + ",0)";
       });
-    this.copyMin.text(data.minCopy)
+    this.copyMin.text(data.minCopy);
+
+    //** update percentage arc */
+    this.percentageArc.transition()
+          .duration(1150)
+          .delay(0)
+          .ease(d3.easePoly)
+          .attrTween("d", utils.arcTween(p, this.arc));
   }
 
 
