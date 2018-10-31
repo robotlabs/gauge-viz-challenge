@@ -20,17 +20,17 @@ class Dashboard extends Component {
     }, 3500);
   }
 
-  //** everytime we want to refresh data */
+  //** new data request to endpoint */
   refreshData() {
     gaugeApi(gaugeParser)
       .then((data) => {
-        //returning data after parse ()
+        //** returning data after parse*/
         this.setState({gaugeData: data})
       })  
       .catch(error => {
-          this.setState({gaugeData: error})
-        }
-      );
+        //** api response not ok*/
+        this.setState({gaugeData: error})
+      });
   }
   render() {
     return (
