@@ -19,11 +19,12 @@ export function percPi(v, min, max) {
 }
 
 //** utility to update arc angle, transitioning interpolate */
-export function arcTween(newAngle, arc) {
+export function arcTween(newAngle, arc, onUpdate) {
   return function(d) {
     var interpolate = d3.interpolate(d.endAngle, newAngle);
     return function(t) {
       d.endAngle = interpolate(t);
+      onUpdate(t);
       return arc(d);
     };
   };
