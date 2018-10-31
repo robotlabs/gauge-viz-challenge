@@ -15,7 +15,14 @@ export function createText(x, y, s, parent) {
 //** utility to calculate perc 0 / 1 and move in [-pi/2, pi/2] */
 export function percPi(v, min, max) {
   const pi = Math.PI; 
-  return (pi * (v - min) / (max - min) - (pi / 2));
+  let p = (pi * (v - min) / (max - min) - (pi / 2));
+  if (p < -pi / 2) {
+    return -pi / 2;
+  }
+  if (p > pi / 2) {
+    return pi / 2;
+  }
+  return p;
 }
 
 //** utility to update arc angle, transitioning interpolate */

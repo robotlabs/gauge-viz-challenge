@@ -1,7 +1,9 @@
-import {fetchRequest} from './utils'
 export const gaugeApi = (parser) => {
-  return fetchRequest('https://widgister.herokuapp.com/challenge/frontend')
-  .then((data) => {
-    return parser(data);
-  })
+  return fetch('https://widgister.herokuapp.com/challenge/frontend')
+    .then(response => {
+      return response.json().then(json => {
+        return response.ok ? parser(json) : Promise.reject(json);
+      });
+    });
 }
+

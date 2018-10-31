@@ -29,8 +29,20 @@ class Gauge extends Component{
 
   //** populate d3 objects */
   updateData(data) {
-    const p = utils.percPi(data.value, data.min, data.max);
+    if (data.error) {
+      this.copyError.text(data.error)
+        .attr("transform", function(d, i) {
+          var len = this.getComputedTextLength();
+          return "translate (" + (-len / 2) + ",0)";
+        });
+      this.copyMax.text('');
+      this.copyMin.text('');
+      this.copyValue.text('');
+      return;
+    }
 
+    this.copyError.text('')
+    const p = utils.percPi(data.value, data.min, data.max);
     //** udate copy */
     this.copyMax.text(data.maxCopy)
       .attr("transform", function(d, i) {
@@ -51,7 +63,6 @@ class Gauge extends Component{
   }
 
   onUpdateTransition(t) {
-    console.log('this ', this);
     const v = Math.floor(this.interpolateCopyValue(t));
     this.copyValue.text(v);
       this.copyValue
@@ -72,6 +83,7 @@ class Gauge extends Component{
     this.copyMin = utils.createText(-80, 10, 8, this.svg);
     this.copyMax = utils.createText(80, 10, 8, this.svg);
     this.copyValue = utils.createText(0, -5, 11, this.svg);
+    this.copyError = utils.createText(0, 15, 6, this.svg);
 
     //** create arc */
     this.arc = d3.arc()

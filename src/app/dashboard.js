@@ -14,11 +14,23 @@ class Dashboard extends Component {
   }
   componentDidMount() {
     //** test api */
+    this.refreshData();
+    setInterval(() => {
+      this.refreshData();
+    }, 3500);
+  }
+
+  //** everytime we want to refresh data */
+  refreshData() {
     gaugeApi(gaugeParser)
       .then((data) => {
         //returning data after parse ()
         this.setState({gaugeData: data})
-      })
+      })  
+      .catch(error => {
+          this.setState({gaugeData: error})
+        }
+      );
   }
   render() {
     return (
