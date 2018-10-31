@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {gaugeApi} from './../services/api';
 import {gaugeParser} from './../services/data-parser';
 import Gauge from './gauge/gauge'
-import './app.css';
+import './style.css';
 
-class App extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
     //** init state */
@@ -31,4 +31,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Dashboard;
