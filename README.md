@@ -6,7 +6,7 @@ This is forked from create-react-app
 
 to run use
 ```sh
-`npm install`<br>
+`npm install`
 `npm start`
 ```
 
