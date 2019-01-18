@@ -2,11 +2,11 @@ Challenge.
 Display a gauge viz using this endpoint
 https://widgister.herokuapp.com/challenge/frontend
 
-This is forked by create-react-app
+This is forked from create-react-app
 
 to run use
 ```sh
-`npm install`<br>
+`npm install`
 `npm start`
 ```
 
