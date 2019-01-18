@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import * as d3 from "d3";
 import * as utils from './utils.js';
 import './style.css';
@@ -9,6 +10,12 @@ const radius = 80;
 const innerRadius = radius - (radius / 2.1);
 
 class Gauge extends Component{
+  static propTypes = {
+    data: PropTypes.object
+  }
+  static defaultProps = {
+    data: {}
+  }
   constructor(props) {
     super(props);
     //** ref to select svg with d3 */
@@ -21,7 +28,7 @@ class Gauge extends Component{
     this.valueOld = 0;
   }
   
-  //** prevent component to update. we just need to know when props is update */
+  //** prevent component to render. we just need to know when props is updated */
   shouldComponentUpdate(nextProps) {
     this.updateData(nextProps.data);
     return false;

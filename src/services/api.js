@@ -1,9 +1,9 @@
-export const gaugeApi = (parser) => {
-  return fetch('https://widgister.herokuapp.com/challenge/frontend')
-    .then(response => {
-      return response.json().then(json => {
-        return response.ok ? parser(json) : Promise.reject(json);
-      });
-    });
+export async function gaugeApi(parser) {
+  const response = await fetch('https://widgister.herokuapp.com/challenge/frontend');
+  return responseParser(response, parser);
+}
+async function responseParser(response, parser) {
+  const json = await response.json();
+  return response.ok ? parser(json) : Promise.reject(json);
 }
 
